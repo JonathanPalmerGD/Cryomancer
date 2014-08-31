@@ -8,6 +8,7 @@ public class WorldManager : Singleton<MonoBehaviour>
 	public int endX = 10;
 	public int endY = 10;
 	public int endZ = 10;
+	//public Chunk chunkRoot;
 	GameObject voxelPrefab;
 	List<string> fileNames;
 
@@ -33,7 +34,7 @@ public class WorldManager : Singleton<MonoBehaviour>
 		voxelPrefab = Resources.Load<GameObject>("VoxelPrefab");
 
 		//Create Voxels
-		for (int i = 0; i < endX; i++)
+		/*for (int i = 0; i < endX; i++)
 		{
 			for (int j = 0; j < endY; j++)
 			{
@@ -42,7 +43,7 @@ public class WorldManager : Singleton<MonoBehaviour>
 					CreateVoxel(-i, -j, -k);
 				}
 			}
-		}
+		}*/
 	}
 
 	public void CreateVoxel(int x, int y, int z)
