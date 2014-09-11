@@ -73,6 +73,7 @@ public class TelePlaneDamage : MonoBehaviour
 			charMotor.SetVelocity(new Vector3(0, 0, 0));
 
 			//Damage the player
+			Debug.Log(damageOnReset.Length);
 			stats.health = stats.health - damageOnReset[difficulty];
 			
 			
