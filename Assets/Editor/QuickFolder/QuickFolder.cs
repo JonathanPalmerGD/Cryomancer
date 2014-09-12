@@ -1,7 +1,6 @@
 ﻿//----------------------------
 //		Quickfolder
 //	 Written by Jon Palmer
-//	   Darkwind Media
 //----------------------------
 
 using UnityEngine;
