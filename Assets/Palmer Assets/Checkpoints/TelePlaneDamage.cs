@@ -73,11 +73,8 @@ public class TelePlaneDamage : MonoBehaviour
 			charMotor.SetVelocity(new Vector3(0, 0, 0));
 
 			//Damage the player
-			Debug.Log(damageOnReset.Length);
 			stats.health = stats.health - damageOnReset[difficulty];
 			
-			
-
 			if (player.GetComponent<ScreenFlash>() != null)
 			{
 				player.GetComponent<ScreenFlash>().FlashScreen(fallAudio);
