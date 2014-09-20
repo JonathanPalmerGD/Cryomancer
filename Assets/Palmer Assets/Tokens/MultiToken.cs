@@ -15,6 +15,7 @@ public class MultiToken : MonoBehaviour
 	public bool healPlayer = true;
 	public bool restoreIce = true;
 	public bool increaseMaxIce = true;
+	public bool drainLava = false;
 	
 	//Some audio info
 	public bool playOnPickup = true;
@@ -26,6 +27,7 @@ public class MultiToken : MonoBehaviour
 	public int heal = 10;
 	public int iceGain = 10;
 	public int maxIceGain = 5;
+	public int lavaDrainDuration = 5;
 
 	// Use this for initialization
 	void Start () 
@@ -65,6 +67,10 @@ public class MultiToken : MonoBehaviour
 			if (increaseMaxIce)
 			{
 				runner.maxIce += maxIceGain;
+			}
+			if (drainLava)
+			{
+				GameObject.Find("TelePlane").GetComponent<RisingTide>().drainDuration += lavaDrainDuration;
 			}
 			if (playOnPickup)
 			{
