@@ -114,7 +114,7 @@ public class TitleManager : MonoBehaviour
 			GUI.skin = mainSkin;
 			GUI.skin.label.wordWrap = true;
 
-			GUI.Label(new Rect(Screen.width / 2 - Screen.width * .25f, Screen.height * .30f, Screen.width * .5f, Screen.height * .45f), "Thanks for playing\n\n\nCredit to BHinton Photography for the\n\nRetro Ceiling Tile filterforge texture\n\n\nThanks to Variance Theory for\n\nthe Detonator Package");
+			GUI.Label(new Rect(Screen.width / 2 - Screen.width * .25f, Screen.height * .30f, Screen.width * .5f, Screen.height * .45f), "\n\n\nThanks for playing\n\n\n\nCredit to BHinton Photography for the\n\nRetro Ceiling Tile filterforge texture\n\n\nThanks to Variance Theory for\n\nthe Detonator Package\n\n\n\n\nPlay again and press i to activate cheats.\n\n\nThe O-letter key also damages the tyrant.");
 		
 
 			GUI.Label(new Rect(Screen.width * .05f, Screen.height * .85f, Screen.width * .30f, Screen.height * .10f), "Made by Jon Palmer");
