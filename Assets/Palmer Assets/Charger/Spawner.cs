@@ -15,7 +15,10 @@ public class Spawner : MonoBehaviour
 	//The bounds for random or not
 	public float spawnMin = 4.0f;
 	public float spawnMax = 8.0f;
-	public float curSpawnTime = 5.0f;
+	public float curSpawnTime = 10.0f;
+	public float minSpawnTime = 3.0f;
+	public float spawnTimeDrop = .25f;
+	public float timeDropIncrease = .25f;
 
 	// Use this for initialization
 	void Start () 
@@ -47,6 +50,15 @@ public class Spawner : MonoBehaviour
 				Destroy(Instantiate(spawnPrefab, new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z), new Quaternion()), objectLifeTime);
 				//Reset our counter.
 				counter = 0.0f;
+				if (curSpawnTime > minSpawnTime)
+				{
+					curSpawnTime -= spawnTimeDrop;
+					spawnTimeDrop += timeDropIncrease;
+				}
+				else
+				{
+					curSpawnTime = minSpawnTime;
+				}
 			}
 		}
 	}
