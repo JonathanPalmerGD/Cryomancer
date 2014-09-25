@@ -112,6 +112,13 @@ public class PlayerStats : MonoBehaviour
 		}
 		#endregion
 
+		#region Mute Game Volume Toggling
+		if (Input.GetKeyDown(KeyCode.M))
+		{
+			AudioListener.volume = 1 - AudioListener.volume;
+		}
+		#endregion
+
 		#region Cheat Section
 		if (cheatKey)
 		{
