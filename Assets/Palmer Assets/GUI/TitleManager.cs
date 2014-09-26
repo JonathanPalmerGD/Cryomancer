@@ -17,8 +17,12 @@ public class TitleManager : MonoBehaviour
 	public Rect buttonInfo = new Rect(0, 0, 150, 50);
 	public Rect[] buttonInfoArr = { new Rect(0, 0, 150, 50), new Rect(0, 0, 150, 50), new Rect(0, 0, 150, 50) };
 
+	private Rect windowRect = new Rect(20, 20, 900, 700);
+
 	void OnGUI()
 	{
+		//windowRect = GUI.Window(0, windowRect, TitleWindow, "Title Window");
+
 		screenSize = new Vector2(Screen.width, Screen.height);
 		buttonInfo = new Rect(Screen.width / 2 - buttonInfo.width / 2, (Screen.height * .85f) - buttonInfo.height / 2, buttonInfo.width, buttonInfo.height);
 		buttonInfoArr[0] = new Rect(Screen.width / 2 - buttonInfo.width / 2 - buttonInfoArr[0].width - 10, (Screen.height * .85f) - buttonInfoArr[0].height / 2, buttonInfoArr[0].width, buttonInfoArr[0].height);
@@ -132,6 +136,52 @@ public class TitleManager : MonoBehaviour
 			}
 		}
 		#endregion
+	}
+
+	void TitleWindow(int windowID)
+	{
+		GUI.skin = titleSkin;
+		//Draw a rectangle
+		GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), splashTexture, ScaleMode.StretchToFill);
+		GUI.Label(new Rect(Screen.width / 2 - Screen.width * .3f, Screen.height * .05f, Screen.width * .6f, Screen.height * .3f), "Cryomancer Ascension");
+
+		GUI.skin = mainSkin;
+		GUI.skin.label.wordWrap = true;
+		if (Screen.width > 700 && Screen.height > 450)
+		{
+			GUI.Label(new Rect(Screen.width / 2 - Screen.width * .25f, Screen.height * .35f, Screen.width * .5f, Screen.height * .15f), "WASD to move, Space to Jump");
+			GUI.Label(new Rect(Screen.width * .20f, Screen.height * .50f, Screen.width * .60f, Screen.height * .30f), "You are a cryomancer, a naturally gifted ice mage.\n\nYou were imprisoned by the dark tyrant.\n\nThe ice fae have come to aid you.\n\n\n\nYou have awoken.\n\nIt is time to fight back and escape.");
+
+			GUI.Label(new Rect(Screen.width * .05f, Screen.height * .85f, Screen.width * .30f, Screen.height * .10f), "Made by Jon Palmer");
+			GUI.Label(new Rect(Screen.width * .05f, Screen.height * .90f, Screen.width * .30f, Screen.height * .10f), "www.JonathanPalmerGD.com");
+		}
+		else
+		{
+			GUI.Label(new Rect(0, Screen.height * .10f, Screen.width, Screen.height * .50f), "Your resolution is low.\n\nPlease full screen.");
+		}
+
+		string buttonText = "";
+		if (isLoading[0])
+		{
+			buttonText = loadingText;
+		}
+		else
+		{
+			buttonText = playText;
+		}
+		if (GUI.Button(buttonInfo, buttonText))
+		{
+			isLoading[0] = true;
+			Application.LoadLevel(Application.loadedLevel + 1);
+		}
+
+		if (GUI.Button(new Rect(10, 20, 100, 20), "Hello World"))
+		{
+			Debug.Log("Got a click\n");
+		}
+		
+
+		GUI.DragWindow(new Rect(0, 0, 10000, 10000));
 	}
 
 	// Use this for initialization

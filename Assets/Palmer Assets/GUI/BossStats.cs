@@ -203,6 +203,8 @@ public class BossStats : MonoBehaviour
 		}
 		if (health <= 0 && stateCounter >= dyingDuration && phase == BossPhase.Dying)
 		{
+			GameObject.FindGameObjectWithTag("Player").transform.FindChild("AudioBus").audio.Stop();
+
 			deathExplosion.audio.Play();
 			deathExplosion.GetComponent<Detonator>().Explode();
 			victorySphere.SetActive(true);
