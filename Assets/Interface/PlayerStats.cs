@@ -21,9 +21,14 @@ public class PlayerStats : MonoBehaviour
 
 	public static bool paused = false;
 
+	#region Menu
 	private Rect pauseMenuRect;
-	public float pauseMenuWidth = 200;
-	public float pauseMenuHeight = 50;
+	private float pauseMenuWidth = 200;
+	private float pauseMenuHeight = 390;
+
+	private int menuMode;
+
+	#endregion
 
 	// Use this for initialization
 	void Start ()
@@ -56,19 +61,37 @@ public class PlayerStats : MonoBehaviour
 	{
 		//Print our health bar. Will likely get updated.
 		curScreenSize = new Vector2(Screen.width, Screen.height);
-		Rect boxInfo = new Rect(Screen.width / 2 - 200, Screen.height - 45, 400, 35);
+		Rect boxInfo = new Rect(Screen.width / 2 - 175, Screen.height - 45, 350, 28);
 		string playerHp = "";
 		for (int i = 0; i < (int)(health / 10); i++)
 		{
 			playerHp += " [ + ] ";
 		}
-		GUI.Box(boxInfo, playerHp);
+		GUIStyle style = new GUIStyle(GUI.skin.box);
+		style.fontSize = 16;
+		GUI.Box(boxInfo, playerHp, style);
 
 		SetPauseMenuRect();
 
 		if (paused)
 		{
-			pauseMenuRect = GUI.Window(0, pauseMenuRect, PauseMenu, "Paused");
+			switch (menuMode)
+			{
+				case 0:
+					pauseMenuRect = GUI.Window(menuMode, pauseMenuRect, PauseMenu, "Paused");
+					break;
+				case 1:
+					pauseMenuRect = GUI.Window(menuMode, pauseMenuRect, SettingsMenu, "Settings & Controls");
+					break;
+				case 2:
+					pauseMenuRect = GUI.Window(menuMode, pauseMenuRect, AboutMenu, "About");
+					break;
+				default:
+					Debug.LogError("Defaulted on menu switch statement. Should not happen. Unpausing to try and reset state.\n");
+					paused = false;
+					Time.timeScale = 1.0f;
+					break;
+			}
 		}
 	}
 
@@ -78,17 +101,77 @@ public class PlayerStats : MonoBehaviour
 			Screen.width / 2 - pauseMenuWidth / 2,
 			Screen.height / 2 - pauseMenuHeight / 2,
 			pauseMenuWidth, pauseMenuHeight);
-		Debug.Log(pauseMenuRect + "\n");
-
+		//Debug.Log(pauseMenuRect + "\n");
 	}
 
 	void PauseMenu(int windowID)
 	{
-		if(GUI.Button(new Rect(10, 110, 80, 80), "Resume"))
+		if(GUI.Button(new Rect(10, 20, 180, 80), "Resume"))
 		{
 			paused = false;
+			Time.timeScale = 1.0f;
 		}
 
+		if (GUI.Button(new Rect(10, 110, 180, 80), "Settings & Controls"))
+		{
+			menuMode = 1;
+		}
+
+		if (GUI.Button(new Rect(10, 200, 180, 80), "About"))
+		{
+			menuMode = 2;
+		}
+
+		if (GUI.Button(new Rect(10, 290, 180, 80), "Quit"))
+		{
+			Application.Quit();
+		}
+	}
+
+	void SettingsMenu(int windowID)
+	{
+		if (GUI.Button(new Rect(10, 20, 180, 80), "Back"))
+		{
+			menuMode = 0;
+		}
+
+		if (GUI.Button(new Rect(10, 110, 90, 80), "Reduce\nSensitivity"))
+		{
+			MouseLook look = GetComponent<MouseLook>();
+			if (look.sensitivityX > 3)
+			{
+				look.sensitivityX -= 2f;
+			}
+		}
+		if (GUI.Button(new Rect(100, 110, 90, 80), "Increase\nSensitivity"))
+		{
+			MouseLook look = GetComponent<MouseLook>();
+			if (look.sensitivityX < 19)
+			{
+				look.sensitivityX += 2f;
+			}
+		}
+		/*
+		if (GUI.Button(new Rect(10, 200, 180, 80), ""))
+		{
+		}
+
+		if (GUI.Button(new Rect(10, 290, 180, 80), ""))
+		{
+		}*/
+	}
+
+	void AboutMenu(int windowID)
+	{
+		if (GUI.Button(new Rect(10, 20, 180, 80), "Back"))
+		{
+			menuMode = 0;
+		}
+
+		if (GUI.Button(new Rect(10, 110, 180, 80), ""))
+		{
+
+		}
 	}
 
 	// Update is called once per frame
@@ -126,6 +209,7 @@ public class PlayerStats : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
 			paused = !paused;
+			Time.timeScale = 1.0f - Time.timeScale;
 		}
 
 		if (paused)

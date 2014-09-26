@@ -67,6 +67,10 @@ public class TitleManager : MonoBehaviour
 				isLoading[0] = true;
 				Application.LoadLevel(Application.loadedLevel + 1);
 			}
+			if (GUI.Button(new Rect(buttonInfo.xMin, buttonInfo.yMin + buttonInfo.height + 10, buttonInfo.width, buttonInfo.height), "Quit"))
+			{
+				Application.Quit();
+			}
 		}
 		#endregion
 		#region Game Over State
@@ -130,9 +134,9 @@ public class TitleManager : MonoBehaviour
 				menuState = 0;
 				//Application.LoadLevel(0);
 			}
-			else
+			if (GUI.Button(new Rect(buttonInfo.xMin, buttonInfo.yMin + buttonInfo.height + 10, buttonInfo.width, buttonInfo.height), "Quit"))
 			{
-
+				Application.Quit();
 			}
 		}
 		#endregion

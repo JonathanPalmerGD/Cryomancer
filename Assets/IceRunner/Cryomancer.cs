@@ -401,7 +401,7 @@ public class Cryomancer : MonoBehaviour
 	#region Button Checking
 	public bool IsPlatform()
 	{
-		if (platformUnlocked && (Input.GetButtonDown("Fire3")))// || Input.GetMouseButtonDown(1)))
+		if (platformUnlocked && (Input.GetButtonDown("Redirect")))// || Input.GetMouseButtonDown(1)))
 		{
 			return true;
 		}
@@ -410,7 +410,7 @@ public class Cryomancer : MonoBehaviour
 
 	public bool IsShield()
 	{
-		if (shieldUnlocked && (Input.GetButtonDown("Fire4")))// || Input.GetMouseButtonDown(3)))
+		if (shieldUnlocked && (Input.GetButtonDown("Shield")))// || Input.GetMouseButtonDown(3)))
 		{
 			return true;
 		}
@@ -423,11 +423,11 @@ public class Cryomancer : MonoBehaviour
 		{
 			return true;
 		}
-		if (declineUnlocked && (Input.GetButton("Fire1")))
+		if (declineUnlocked && (Input.GetButton("Glide")))
 		{
 			return true;
 		}
-		if (declineUnlocked && Input.GetAxis("Fire1") > .5f)
+		if (declineUnlocked && Input.GetAxis("Glide") > .5f)
 		{
 			return true;
 		}
@@ -440,11 +440,11 @@ public class Cryomancer : MonoBehaviour
 		{
 			return true;
 		}
-		if (inclineUnlocked && (Input.GetButton("Fire2")))
+		if (inclineUnlocked && (Input.GetButton("Ascend")))
 		{
 			return true;
 		}
-		if (inclineUnlocked && Input.GetAxis("Fire2") > .5f)
+		if (inclineUnlocked && Input.GetAxis("Ascend") > .5f)
 		{
 			return true;
 		}
@@ -453,11 +453,11 @@ public class Cryomancer : MonoBehaviour
 
 	public bool IsDeclineUp()
 	{
-		if (declineUnlocked && (Input.GetButtonUp("Fire1")))// || Input.GetMouseButtonUp(0)))
+		if (declineUnlocked && (Input.GetButtonUp("Glide")))// || Input.GetMouseButtonUp(0)))
 		{
 			return true;
 		}
-		else if (declineUnlocked && Input.GetAxisRaw("Fire1") < 0)
+		else if (declineUnlocked && Input.GetAxisRaw("Glide") < 0)
 		{
 			return true;
 		}
@@ -466,11 +466,11 @@ public class Cryomancer : MonoBehaviour
 
 	public bool IsInclineUp()
 	{
-		if (inclineUnlocked && (Input.GetButtonUp("Fire2")))// || Input.GetMouseButtonUp(0)))
+		if (inclineUnlocked && (Input.GetButtonUp("Ascend")))// || Input.GetMouseButtonUp(0)))
 		{
 			return true;
 		}
-		else if (inclineUnlocked && Input.GetAxisRaw("Fire2") < 0)
+		else if (inclineUnlocked && Input.GetAxisRaw("Ascend") < 0)
 		{
 			return true;
 		}
