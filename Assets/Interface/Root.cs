@@ -30,7 +30,7 @@ public class Root : MonoBehaviour
 	{
 		rootRect = new Rect(0, 0, Screen.width, Screen.height);
 		List<Anchor> anchors = GetComponentsInChildren<Anchor>().ToList();
-
+		
 		//We sort by the depth of the anchors
 		anchors = anchors.OrderBy(item => item.depth).ToList();
 		anchors.Reverse();

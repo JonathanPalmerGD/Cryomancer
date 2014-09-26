@@ -19,6 +19,12 @@ public class PlayerStats : MonoBehaviour
 	public GameStats gameStats;
 	public Vector2 curScreenSize;
 
+	public static bool paused = false;
+
+	private Rect pauseMenuRect;
+	public float pauseMenuWidth = 200;
+	public float pauseMenuHeight = 50;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -42,6 +48,8 @@ public class PlayerStats : MonoBehaviour
 		{
 			boss = GameObject.FindGameObjectWithTag("Boss").GetComponent<BossStats>();
 		}
+
+		SetPauseMenuRect();
 	}
 
 	void OnGUI()
@@ -55,8 +63,34 @@ public class PlayerStats : MonoBehaviour
 			playerHp += " [ + ] ";
 		}
 		GUI.Box(boxInfo, playerHp);
+
+		SetPauseMenuRect();
+
+		if (paused)
+		{
+			pauseMenuRect = GUI.Window(0, pauseMenuRect, PauseMenu, "Paused");
+		}
 	}
-	
+
+	void SetPauseMenuRect()
+	{
+		pauseMenuRect = new Rect(
+			Screen.width / 2 - pauseMenuWidth / 2,
+			Screen.height / 2 - pauseMenuHeight / 2,
+			pauseMenuWidth, pauseMenuHeight);
+		Debug.Log(pauseMenuRect + "\n");
+
+	}
+
+	void PauseMenu(int windowID)
+	{
+		if(GUI.Button(new Rect(10, 110, 80, 80), "Resume"))
+		{
+			paused = false;
+		}
+
+	}
+
 	// Update is called once per frame
 	void Update ()
 	{
@@ -91,15 +125,25 @@ public class PlayerStats : MonoBehaviour
 		#region Mouse Control
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
+			paused = !paused;
+		}
+
+		if (paused)
+		{
 			Screen.showCursor = true;
 			Screen.lockCursor = false;
 		}
-
-		if (Input.GetKeyDown(KeyCode.Return))
+		else if (!paused)
 		{
 			Screen.showCursor = false;
 			Screen.lockCursor = true;
 		}
+
+		/*if (Input.GetKeyDown(KeyCode.Return))
+		{
+			Screen.showCursor = false;
+			Screen.lockCursor = true;
+		}*/
 		#endregion
 
 		#region Check for cheat code enabling
