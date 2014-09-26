@@ -21,16 +21,16 @@ public class PlayerStats : MonoBehaviour
 
 	public static bool paused = false;
 
-	#region Menu
+	#region Menu Variables
 	private Rect pauseMenuRect;
 	private float pauseMenuWidth = 200;
 	private float pauseMenuHeight = 390;
 
 	private int menuMode;
+	public bool wasPlaying = false;
 
 	#endregion
 
-	// Use this for initialization
 	void Start ()
 	{
 		if (cursorLocking)
@@ -75,16 +75,18 @@ public class PlayerStats : MonoBehaviour
 
 		if (paused)
 		{
+			GUI.Box(new Rect(-5, -5, Screen.width + 5, Screen.height + 5), "");
+			GUI.Box(new Rect(-5, -5, Screen.width + 5, Screen.height + 5), "");
 			switch (menuMode)
 			{
 				case 0:
-					pauseMenuRect = GUI.Window(menuMode, pauseMenuRect, PauseMenu, "Paused");
+					pauseMenuRect = GUI.Window(menuMode, pauseMenuRect, DrawPauseMenu, "Paused");
 					break;
 				case 1:
-					pauseMenuRect = GUI.Window(menuMode, pauseMenuRect, SettingsMenu, "Settings & Controls");
+					pauseMenuRect = GUI.Window(menuMode, pauseMenuRect, DrawSettingsMenu, "Settings & Controls");
 					break;
 				case 2:
-					pauseMenuRect = GUI.Window(menuMode, pauseMenuRect, AboutMenu, "About");
+					pauseMenuRect = GUI.Window(menuMode, pauseMenuRect, DrawAboutMenu, "About");
 					break;
 				default:
 					Debug.LogError("Defaulted on menu switch statement. Should not happen. Unpausing to try and reset state.\n");
@@ -92,6 +94,31 @@ public class PlayerStats : MonoBehaviour
 					Time.timeScale = 1.0f;
 					break;
 			}
+		}
+	}
+
+	#region Helper Methods - Pause, Resume, Size Pause Rect
+	void ResumePlay()
+	{
+		paused = false;
+		Time.timeScale = 1.0f;
+
+		if (wasPlaying)
+		{
+			transform.FindChild("AudioBus").audio.Play();
+		}
+	}
+
+	void PausePlay()
+	{
+		paused = true;
+		Time.timeScale = 0.0f;
+
+		AudioSource playerBus = transform.FindChild("AudioBus").audio;
+		if (playerBus.isPlaying)
+		{
+			transform.FindChild("AudioBus").audio.Pause();
+			wasPlaying = true;
 		}
 	}
 
@@ -103,13 +130,14 @@ public class PlayerStats : MonoBehaviour
 			pauseMenuWidth, pauseMenuHeight);
 		//Debug.Log(pauseMenuRect + "\n");
 	}
+	#endregion
 
-	void PauseMenu(int windowID)
+	#region Draw Menus
+	void DrawPauseMenu(int windowID)
 	{
 		if(GUI.Button(new Rect(10, 20, 180, 80), "Resume"))
 		{
-			paused = false;
-			Time.timeScale = 1.0f;
+			ResumePlay();
 		}
 
 		if (GUI.Button(new Rect(10, 110, 180, 80), "Settings & Controls"))
@@ -128,7 +156,7 @@ public class PlayerStats : MonoBehaviour
 		}
 	}
 
-	void SettingsMenu(int windowID)
+	void DrawSettingsMenu(int windowID)
 	{
 		if (GUI.Button(new Rect(10, 20, 180, 80), "Back"))
 		{
@@ -161,7 +189,7 @@ public class PlayerStats : MonoBehaviour
 		}*/
 	}
 
-	void AboutMenu(int windowID)
+	void DrawAboutMenu(int windowID)
 	{
 		if (GUI.Button(new Rect(10, 20, 180, 80), "Back"))
 		{
@@ -173,10 +201,11 @@ public class PlayerStats : MonoBehaviour
 
 		}
 	}
+	#endregion
 
-	// Update is called once per frame
 	void Update ()
 	{
+		#region Player Health Check
 		//If the player dies, do something
 		if (health <= 0)
 		{
@@ -184,6 +213,7 @@ public class PlayerStats : MonoBehaviour
 			gameStats.menuState = 1;
 			Application.LoadLevel(0);
 		}
+		#endregion
 
 		#region Adjust Sensitivity
 		if (Input.GetKeyDown(KeyCode.G))
@@ -205,13 +235,21 @@ public class PlayerStats : MonoBehaviour
 		}
 		#endregion
 
-		#region Mouse Control
+		#region Check Paused
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			paused = !paused;
-			Time.timeScale = 1.0f - Time.timeScale;
+			if(paused)
+			{
+				ResumePlay();
+			}
+			else
+			{
+				PausePlay();
+			}
 		}
+		#endregion
 
+		#region Cursor Hide & Cursor LockLocking
 		if (paused)
 		{
 			Screen.showCursor = true;
@@ -222,12 +260,6 @@ public class PlayerStats : MonoBehaviour
 			Screen.showCursor = false;
 			Screen.lockCursor = true;
 		}
-
-		/*if (Input.GetKeyDown(KeyCode.Return))
-		{
-			Screen.showCursor = false;
-			Screen.lockCursor = true;
-		}*/
 		#endregion
 
 		#region Check for cheat code enabling

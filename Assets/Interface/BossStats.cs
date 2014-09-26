@@ -117,7 +117,10 @@ public class BossStats : MonoBehaviour
 				}
 				hpString += " ]";
 			}
-			GUI.Box(boxInfo, hpString);
+
+			GUIStyle style = new GUIStyle(GUI.skin.box);
+			style.fontSize = 20;
+			GUI.Box(boxInfo, hpString, style);
 		}
 	}
 	
