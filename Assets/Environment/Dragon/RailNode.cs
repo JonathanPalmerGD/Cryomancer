@@ -9,7 +9,7 @@ public class RailNode : MonoBehaviour
 
 	public int id;
 	public List<RailNode> adjacentNodes;
-	public float verticalOffset;
+	public static float verticalOffset = 20f;
 
 	void Start () 
 	{

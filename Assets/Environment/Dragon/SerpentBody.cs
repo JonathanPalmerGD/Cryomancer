@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SerpentHead : MonoBehaviour 
+public class SerpentBody : MonoBehaviour 
 {
 	public GameObject target = null;
 	private RailNode nearestNode;
@@ -12,6 +12,7 @@ public class SerpentHead : MonoBehaviour
 	private Vector3 moveDirection;
 	private Vector3 steeringForce;
 	private Vector3 startPos;
+	public bool changingDest = false;
 	
 	void Start () 
 	{
@@ -38,7 +39,6 @@ public class SerpentHead : MonoBehaviour
 			Debug.DrawLine(transform.position, new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z), Color.cyan, .2f);
 			steeringForce += seekWt * steering.Seek(target.transform.position);
 		}
-
 	}
 
 	private void CheckArrive()
@@ -50,9 +50,17 @@ public class SerpentHead : MonoBehaviour
 				RailNode dest = target.GetComponent<RailNode>();
 
 				int r = Random.Range(0, dest.adjacentNodes.Count);
-				//Debug.Log(r + "\n");
+				Debug.Log(r + "\n");
 				target = dest.adjacentNodes[r].gameObject;
 			}
+		}
+	}
+
+	private void CheckDistanceToHead()
+	{
+		if (Vector3.Distance(transform.position, target.transform.position) < 8)
+		{
+			steering.maxSpeed = Vector3.Distance(transform.position, target.transform.position) / 2 * 15;
 		}
 	}
 
@@ -78,6 +86,9 @@ public class SerpentHead : MonoBehaviour
 
 		controller.Move(moveDirection * Time.deltaTime);
 
-		CheckArrive();
+		if (changingDest)
+		{
+			CheckArrive();
+		}
 	}
 }

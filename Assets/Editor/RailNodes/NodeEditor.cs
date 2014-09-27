@@ -56,24 +56,31 @@ public class NodeEditor : EditorWindow
 			}
 			//Debug.Log(counter + "\n");
 
-			for (int i = 0; i < xVal - 1; i++)
+			for (int i = 1; i < xVal - 1; i++)
 			{
-				for (int j = 0; j < zVal - 1; j++)
+				for (int j = 1; j < zVal - 1; j++)
 				{
 					RailNode rn = nodes[i, j].GetComponent<RailNode>();
 
+					rn.adjacentNodes = new List<RailNode>();
+
 					// If not at the left edge
-					if (nodes[i, j + 1] != null)
-						rn.adjacentNodes[3] = nodes[i, j + 1].GetComponent<RailNode>();
-
-					if (nodes[i, j - 1] != null)
-						rn.adjacentNodes[1] = nodes[i, j - 1].GetComponent<RailNode>();
-
-					if (nodes[i + 1, j] != null)
-						rn.adjacentNodes[0] = nodes[i + 1, j].GetComponent<RailNode>();
-
-					if (nodes[i - 1, j] != null)
-						rn.adjacentNodes[0] = nodes[i - 1, j].GetComponent<RailNode>();
+					if (i + 1 < xVal - 1 && nodes[i + 1, j] != null)
+					{
+						rn.adjacentNodes.Add(nodes[i + 1, j].GetComponent<RailNode>());
+					}
+					if (j > 0 && nodes[i, j - 1] != null)
+					{
+						rn.adjacentNodes.Add(nodes[i, j - 1].GetComponent<RailNode>());
+					}
+					if (i > 0 && nodes[i - 1, j] != null)
+					{
+						rn.adjacentNodes.Add(nodes[i - 1, j].GetComponent<RailNode>());
+					}
+					if (j + 1 < zVal - 1 && nodes[i, j + 1] != null)
+					{
+						rn.adjacentNodes.Add(nodes[i, j + 1].GetComponent<RailNode>());
+					}
 				}
 			}
 		}
