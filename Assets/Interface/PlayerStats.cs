@@ -114,11 +114,14 @@ public class PlayerStats : MonoBehaviour
 		paused = true;
 		Time.timeScale = 0.0f;
 
-		AudioSource playerBus = transform.FindChild("AudioBus").audio;
-		if (playerBus.isPlaying)
+		if (transform.FindChild("AudioBus") != null)
 		{
-			transform.FindChild("AudioBus").audio.Pause();
-			wasPlaying = true;
+			AudioSource playerBus = transform.FindChild("AudioBus").audio;
+			if (playerBus.isPlaying)
+			{
+				transform.FindChild("AudioBus").audio.Pause();
+				wasPlaying = true;
+			}
 		}
 	}
 

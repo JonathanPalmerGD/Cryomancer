@@ -84,26 +84,5 @@ public class NodeEditor : EditorWindow
 				}
 			}
 		}
-		
-
-		/*
-		//Make a new game object, set the name and set the parent
-		GameObject newFolder = new GameObject();
-		newFolder.name = qFolderName;
-		if (sharedParent != null)
-		{
-			newFolder.transform.parent = sharedParent.transform;
-		}
-
-		for (int i = 0; i < Selection.gameObjects.Length; i++)
-		{
-			Selection.gameObjects[i].transform.parent = newFolder.transform;
-		}
-
-		//have the user select the new folder
-		Selection.activeGameObject = newFolder;
-
-		//Print out the name just in case they click away.
-		message = "[Quickfolder] - Success\n" + "Folder Name: " + qFolderName;*/
 	}
 }
