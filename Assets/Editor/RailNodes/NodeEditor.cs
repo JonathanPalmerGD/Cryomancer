@@ -8,7 +8,7 @@ public class NodeEditor : EditorWindow
 {
 	const int versionNum = 0;
 
-	[MenuItem("GameObject/QuickFolderHotkey #%N")]
+	[MenuItem("Architect/Create Nodes #%N")]
 	static void HotKeyQuickFolder()
 	{
 		GameObject parentOfNodes = GameObject.Find("RailNodes");
@@ -24,20 +24,60 @@ public class NodeEditor : EditorWindow
 
 		GameObject floorObject = GameObject.Find("DragonFloor");
 
-		GameObject[,] nodes = new GameObject[(int)(floorObject.transform.localScale.x / 10), (int)(floorObject.transform.localScale.y / 10)];
+		//Debug.Log("X: " + (int)(floorObject.transform.localScale.x / 10) + "\nZ: " + (int)(floorObject.transform.localScale.z / 10));
 
+		int xVal = (int)(floorObject.transform.localScale.x / 10);
+		int zVal = (int)(floorObject.transform.localScale.z / 10);
+
+		GameObject[,] nodes = new GameObject[xVal - 1, zVal - 1];
+		//Debug.Log(nodes.Length + "\n");
+		int counter = 0;
 		if (floorObject != null)
 		{
-			for (int i = 0; i < (int)(floorObject.transform.localScale.x / 10); i++)
+			GameObject parent;
+			for (int i = 1; i < xVal - 1; i++)
 			{
-				for (int j = 0; j < (int)(floorObject.transform.localScale.z / 10); j++)
+				parent = new GameObject("Row X - " + i);
+				parent.transform.parent = parentOfNodes.transform;
+				for (int j = 1; j < zVal - 1; j++)
 				{
-					nodes[i, j].name = "RailNode (" + i + "," + j + ")";
-					nodes[i, j].transform.parent = parentOfNodes.transform;
+					nodes[i, j] = new GameObject("RailNode (" + i + "," + j + ")");
+					nodes[i, j].transform.position = new Vector3(
+							i * 10 - floorObject.transform.localScale.x / 2,
+							40, 
+							j * 10 - floorObject.transform.localScale.z / 2);
+					nodes[i, j].transform.parent = parent.transform;
+
+					RailNode rn = nodes[i, j].AddComponent<RailNode>();
+					rn.id = counter;
+
+					counter++;
+				}
+			}
+			//Debug.Log(counter + "\n");
+
+			for (int i = 0; i < xVal - 1; i++)
+			{
+				for (int j = 0; j < zVal - 1; j++)
+				{
+					RailNode rn = nodes[i, j].GetComponent<RailNode>();
+
+					// If not at the left edge
+					if (nodes[i, j + 1] != null)
+						rn.adjacentNodes[3] = nodes[i, j + 1].GetComponent<RailNode>();
+
+					if (nodes[i, j - 1] != null)
+						rn.adjacentNodes[1] = nodes[i, j - 1].GetComponent<RailNode>();
+
+					if (nodes[i + 1, j] != null)
+						rn.adjacentNodes[0] = nodes[i + 1, j].GetComponent<RailNode>();
+
+					if (nodes[i - 1, j] != null)
+						rn.adjacentNodes[0] = nodes[i - 1, j].GetComponent<RailNode>();
 				}
 			}
 		}
-
+		
 
 		/*
 		//Make a new game object, set the name and set the parent
