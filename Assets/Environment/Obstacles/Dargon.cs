@@ -21,6 +21,9 @@ public class Dargon : MonoBehaviour
 	public GameObject[] bodyParts;
 	public GameObject curTarg;
 
+	public enum MovementState { Standard, Chase, Stop };
+	public MovementState moveState;
+
 	public enum DragonState { Shotgun, Stream, Homing, Laser };
 	public DragonState curState = DragonState.Stream;
 
