@@ -115,25 +115,25 @@ public class Cryomancer : MonoBehaviour
 		if (ice > 0 || !resourceBased)
 		{ 
 			#region R Block
-			if ((!resourceBased || ice >= platformCost) && IsPlatform())
+			if ((!resourceBased || ice >= platformCost) && !PlayerStats.paused && IsPlatform())
 			{
 				CreatePlatform();
 			}
 			#endregion
 			#region Shift Block
-			if ((!resourceBased || ice >= shieldCost) && IsShield())	//Incline block
+			if ((!resourceBased || ice >= shieldCost) && !PlayerStats.paused && IsShield())	//Incline block
 			{
 				CreateShield();
 			}
 			#endregion
 			#region E Block
-			if ((!resourceBased || ice >= inclineCost) && IsIncline() && (!lockoutAbilities || timeSinceAbility > abilityLockout))	//Incline block
+			if ((!resourceBased || ice >= inclineCost) && !PlayerStats.paused && IsIncline() && (!lockoutAbilities || timeSinceAbility > abilityLockout))	//Incline block
 			{
 				CreateIncline();
 			}
 			#endregion
 			#region Q Block
-			if ((!resourceBased || ice >= declineCost) && IsDecline() && !IsIncline() && (!lockoutAbilities || timeSinceAbility > abilityLockout))	//Decline block
+			if ((!resourceBased || ice >= declineCost) && !PlayerStats.paused && IsDecline() && !IsIncline() && (!lockoutAbilities || timeSinceAbility > abilityLockout))	//Decline block
 			{
 				CreateDecline();
 			}
@@ -389,13 +389,13 @@ public class Cryomancer : MonoBehaviour
 	public void UpdateButtonMatrix()
 	{
 		//Decline
-		buttonMatrix[0] = IsDecline();
+		buttonMatrix[0] = !PlayerStats.paused && IsDecline();
 		//Incline
-		buttonMatrix[1] = IsIncline();
+		buttonMatrix[1] = !PlayerStats.paused && IsIncline();
 		//Platform
-		buttonMatrix[2] = IsPlatform();
+		buttonMatrix[2] = !PlayerStats.paused && IsPlatform();
 		//Shield
-		buttonMatrix[3] = IsShield();
+		buttonMatrix[3] = !PlayerStats.paused && IsShield();
 	}
 
 	#region Button Checking
