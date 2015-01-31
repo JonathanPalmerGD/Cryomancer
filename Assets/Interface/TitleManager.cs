@@ -36,7 +36,7 @@ public class TitleManager : MonoBehaviour
 			GUI.skin = titleSkin;
 			//Draw a rectangle
 			GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), splashTexture, ScaleMode.StretchToFill);
-			GUI.Label(new Rect(Screen.width / 2 - Screen.width * .3f, Screen.height * .05f, Screen.width * .6f, Screen.height * .3f), "Cryomancer Ascension");
+			GUI.Label(new Rect(Screen.width / 2 - Screen.width * .3f, Screen.height * .05f, Screen.width * .6f, Screen.height * .3f), "Cryomancer");
 
 			GUI.skin = mainSkin;
 			GUI.skin.label.wordWrap = true;
@@ -122,7 +122,8 @@ public class TitleManager : MonoBehaviour
 			GUI.skin = mainSkin;
 			GUI.skin.label.wordWrap = true;
 
-			GUI.Label(new Rect(Screen.width / 2 - Screen.width * .25f, Screen.height * .26f, Screen.width * .5f, Screen.height * .50f), "\n\n\nThanks for playing\n\n\nCredit to BHinton Photography for the\nRetro Ceiling Tile filterforge texture\n\nThanks to Variance Theory for\nthe Detonator Package\n\n\nPlay again and press I to activate cheats.\nThe O-letter key also damages the tyrant.\n\nPress P in any menu for a\ndifferent game - Ice Survival.");
+			GUI.Label(new Rect(Screen.width / 2 - Screen.width * .25f, Screen.height * .26f, Screen.width * .5f, Screen.height * .50f), "\n\nThanks for playing" +
+				"\n\nCredit to BHinton Photography for the\nRetro Ceiling Tile filterforge texture\n\nThanks to Variance Theory for\nthe Detonator Package\n\nwww.AaronPaullow for the amazing music!\n\nPlay again and press I to activate cheats.\nThe O-letter key also damages the tyrant.\n\nPress P in any menu for a\ndifferent game - Ice Survival.");
 		
 
 			GUI.Label(new Rect(Screen.width * .05f, Screen.height * .85f, Screen.width * .30f, Screen.height * .10f), "Made by Jon Palmer");

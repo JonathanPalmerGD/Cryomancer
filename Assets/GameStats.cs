@@ -4,8 +4,8 @@ using System.Collections;
 public class GameStats : MonoBehaviour 
 {
 	public bool eldest = false;
-	public float mouseXSensitivity = 11;
-	public float mouseYSensitivity = 0;
+	public float mouseXSensitivity = 8;
+	public float mouseYSensitivity = 8;
 	public float playerMaxIce = 25;
 	public int difficulty = 1;
 	public int menuState = 0;
@@ -42,6 +42,12 @@ public class GameStats : MonoBehaviour
 		MouseLook look = GameObject.FindGameObjectWithTag("Player").GetComponent<MouseLook>();
 		mouseXSensitivity = look.sensitivityX;
 		mouseYSensitivity = look.sensitivityY;
+
+		MouseLook look2 = GameObject.FindGameObjectWithTag("Player").transform.FindChild("Main Camera").camera.GetComponent<MouseLook>();
+
+		mouseXSensitivity = look2.sensitivityX;
+		mouseYSensitivity = look2.sensitivityY;
+
 		Cryomancer runner = GameObject.FindGameObjectWithTag("Player").GetComponent<Cryomancer>();
 		playerMaxIce = runner.maxIce;
 	}
@@ -53,6 +59,12 @@ public class GameStats : MonoBehaviour
 			look = GameObject.FindGameObjectWithTag("Player").GetComponent<MouseLook>();
 			look.sensitivityX = mouseXSensitivity;
 			look.sensitivityY = mouseYSensitivity;
+
+			MouseLook look2 = GameObject.FindGameObjectWithTag("Player").transform.FindChild("Main Camera").camera.GetComponent<MouseLook>();
+
+			look2.sensitivityX = mouseXSensitivity;
+			look2.sensitivityY = mouseYSensitivity;
+			
 			GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>().difficulty = difficulty;
 			runner = GameObject.FindGameObjectWithTag("Player").GetComponent<Cryomancer>();
 			runner.changeMaxIce(playerMaxIce);

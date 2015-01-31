@@ -5,7 +5,6 @@ public class MusicVolume : MonoBehaviour
 {
 	public bool triggered = false;
 	public AudioClip music;
-	public string clipName;
 
 	void Start()
 	{
@@ -14,17 +13,20 @@ public class MusicVolume : MonoBehaviour
 
 	void OnTriggerEnter(Collider collider)
 	{
-		if (!triggered)// && clipName.Length > 0)
+		if (music != null)
 		{
-			if (collider.gameObject.tag == "Player")
+			if (!triggered)// && clipName.Length > 0)
 			{
-				triggered = true;
+				if (collider.gameObject.tag == "Player")
+				{
+					triggered = true;
 
-				GameObject child = collider.gameObject.transform.FindChild("AudioBus").gameObject;
+					GameObject child = collider.gameObject.transform.FindChild("AudioBus").gameObject;
 
-				child.audio.clip = music;
-				child.audio.Play();
-				
+					child.audio.clip = music;
+					child.audio.Play();
+
+				}
 			}
 		}
 	}

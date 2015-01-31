@@ -169,17 +169,35 @@ public class PlayerStats : MonoBehaviour
 		if (GUI.Button(new Rect(10, 110, 90, 80), "Reduce\nSensitivity"))
 		{
 			MouseLook look = GetComponent<MouseLook>();
+			MouseLook look2 = transform.FindChild("Main Camera").camera.GetComponent<MouseLook>();
 			if (look.sensitivityX > 3)
 			{
 				look.sensitivityX -= 2f;
+			}
+			if (look2.sensitivityX > 3)
+			{
+				look2.sensitivityX -= 2f;
+			}
+			if (look2.sensitivityY > 3)
+			{
+				look2.sensitivityY -= 2f;
 			}
 		}
 		if (GUI.Button(new Rect(100, 110, 90, 80), "Increase\nSensitivity"))
 		{
 			MouseLook look = GetComponent<MouseLook>();
+			MouseLook look2 = transform.FindChild("Main Camera").camera.GetComponent<MouseLook>();
 			if (look.sensitivityX < 19)
 			{
 				look.sensitivityX += 2f;
+			}
+			if (look2.sensitivityX < 19)
+			{
+				look2.sensitivityX += 2f;
+			} 
+			if (look2.sensitivityY < 19)
+			{
+				look2.sensitivityY += 2f;
 			}
 		}
 		/*
