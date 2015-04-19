@@ -8,7 +8,7 @@ public class MusicVolume : MonoBehaviour
 
 	void Start()
 	{
-		renderer.enabled = false;
+		GetComponent<Renderer>().enabled = false;
 	}
 
 	void OnTriggerEnter(Collider collider)
@@ -23,8 +23,8 @@ public class MusicVolume : MonoBehaviour
 
 					GameObject child = collider.gameObject.transform.FindChild("AudioBus").gameObject;
 
-					child.audio.clip = music;
-					child.audio.Play();
+					child.GetComponent<AudioSource>().clip = music;
+					child.GetComponent<AudioSource>().Play();
 
 				}
 			}

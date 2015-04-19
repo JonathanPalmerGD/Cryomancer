@@ -51,16 +51,16 @@ public class TriggerGainAbilities : MonoBehaviour
 			if (platformUnlocked || shieldUnlocked || inclineUnlocked || declineUnlocked)
 			{
 				
-				collider.gameObject.audio.clip = acquireClip;
-				collider.gameObject.audio.Play();
+				collider.gameObject.GetComponent<AudioSource>().clip = acquireClip;
+				collider.gameObject.GetComponent<AudioSource>().Play();
 			}
 
 			if (deactivateWhileIn)
 			{
 				//Turn off the particle system, kill its particles and stop renderer
-				particleSystem.Clear();
-				particleSystem.Stop();
-				renderer.enabled = false;
+				GetComponent<ParticleSystem>().Clear();
+				GetComponent<ParticleSystem>().Stop();
+				GetComponent<Renderer>().enabled = false;
 			}
 
 			if (turnOff)
@@ -82,8 +82,8 @@ public class TriggerGainAbilities : MonoBehaviour
 			//When they leave, turn back on
 			if (deactivateWhileIn)
 			{
-				renderer.enabled = true;
-				particleSystem.Play();
+				GetComponent<Renderer>().enabled = true;
+				GetComponent<ParticleSystem>().Play();
 			}
 		}
 	}

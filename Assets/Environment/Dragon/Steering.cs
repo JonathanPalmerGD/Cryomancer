@@ -37,8 +37,8 @@ public class Steering : MonoBehaviour
 	// improve this so we only do it once
 	public float Radius {
 		get {
-			float x = renderer.bounds.extents.x;
-			float z = renderer.bounds.extents.z;
+			float x = GetComponent<Renderer>().bounds.extents.x;
+			float z = GetComponent<Renderer>().bounds.extents.z;
 			return Mathf.Sqrt (x * x + z * z);
 		}
 	}
@@ -187,7 +187,7 @@ public class Steering : MonoBehaviour
 		
 		//compute the force
 		dv -= transform.forward * speed;
-		renderer.material.color = Color.yellow;
+		GetComponent<Renderer>().material.color = Color.yellow;
 		return dv;
 	}
 }

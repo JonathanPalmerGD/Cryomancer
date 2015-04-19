@@ -35,7 +35,7 @@ public class DarkCharger : MonoBehaviour
 	{
 		//Set ourself to follow mode.
 		motionState = ChargeState.Following;
-		renderer.material.color = Color.white;
+		GetComponent<Renderer>().material.color = Color.white;
 		player = GameObject.FindGameObjectWithTag("Player");
 	}
 	
@@ -52,17 +52,17 @@ public class DarkCharger : MonoBehaviour
 			dirToPlayer = player.transform.position - transform.position;
 			
 			//Set the velocity while it is following the player
-			rigidbody.velocity = dirToPlayer.normalized * followVelocity;
+			GetComponent<Rigidbody>().velocity = dirToPlayer.normalized * followVelocity;
 			
 			//If we have followed long enough.
 			if (counter > followDuration)
 			{
 				//Stop moving and any forward motion
-				rigidbody.velocity = Vector3.zero;
-				rigidbody.rotation = new Quaternion();
+				GetComponent<Rigidbody>().velocity = Vector3.zero;
+				GetComponent<Rigidbody>().rotation = Quaternion.identity;
 
 				//Update to pause color and pause state.
-				renderer.material.color = Color.grey;
+				GetComponent<Renderer>().material.color = Color.grey;
 				motionState = ChargeState.Pausing;
 
 				//Reset timer
@@ -74,17 +74,17 @@ public class DarkCharger : MonoBehaviour
 		if (motionState == ChargeState.Pausing)
 		{
 			//Set ourself to our pause velocity.
-			rigidbody.velocity = (dirToPlayer.normalized * pauseVelocity) + Vector3.up * 3.0f;
+			GetComponent<Rigidbody>().velocity = (dirToPlayer.normalized * pauseVelocity) + Vector3.up * 3.0f;
 
 			//If we have paused long enough
 			if (counter > pauseDuration)
 			{
 				//Set our velocity and rotation to zero
-				rigidbody.velocity = Vector3.zero;
-				rigidbody.rotation = new Quaternion();
+				GetComponent<Rigidbody>().velocity = Vector3.zero;
+				GetComponent<Rigidbody>().rotation = Quaternion.identity;
 
 				//Show them we are angry
-				renderer.material.color = Color.red;
+				GetComponent<Renderer>().material.color = Color.red;
 
 				//Update our state to say we're charging
 				motionState = ChargeState.Charging;
@@ -92,7 +92,7 @@ public class DarkCharger : MonoBehaviour
 
 				//We move in the direction of the player. We don't update that when charging
 				//Give ourselves a force that scales with our charge force and mass.
-				rigidbody.AddForce(dirToPlayer.normalized * chargeForce * rigidbody.mass);
+				GetComponent<Rigidbody>().AddForce(dirToPlayer.normalized * chargeForce * GetComponent<Rigidbody>().mass);
 			}
 		}
 		#endregion
@@ -103,10 +103,10 @@ public class DarkCharger : MonoBehaviour
 			if (counter > chargeDuration)
 			{
 				//Set our velocity and rotation back to zero to stop charge.
-				rigidbody.velocity = Vector3.zero;
-				rigidbody.rotation = new Quaternion();
+				GetComponent<Rigidbody>().velocity = Vector3.zero;
+				GetComponent<Rigidbody>().rotation = Quaternion.identity;
 				//Change our color and state to say we're not aggressive.
-				renderer.material.color = Color.white;
+				GetComponent<Renderer>().material.color = Color.white;
 				motionState = ChargeState.Following;
 				//Reset our counter
 				counter = 0.0f;

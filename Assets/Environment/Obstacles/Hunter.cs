@@ -19,13 +19,13 @@ public class Hunter : MonoBehaviour
 		initialPosition = transform.position;
 		if (grounded)
 		{
-			collider.enabled = true;
+			GetComponent<Collider>().enabled = true;
 			collisionRadius += 0.2f;
 		}
 		else
 		{
-			Destroy(rigidbody);
-			collider.enabled = false;
+			Destroy(GetComponent<Rigidbody>());
+			GetComponent<Collider>().enabled = false;
 		}
 	}
 

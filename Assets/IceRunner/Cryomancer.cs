@@ -351,7 +351,7 @@ public class Cryomancer : MonoBehaviour
 	public void CreateDecline()
 	{
 		//trans.pos - new v3 = (x - 0, y - 1, z - 0)
-		Vector3 blockPosition = transform.position - new Vector3(0, 1.16f, 0);
+		Vector3 blockPosition = transform.position - new Vector3(0, 1.20f, 0);
 
 		//Create a new object, that we will destroy after 3 seconds.
 		Destroy(Instantiate(cylinderPrefab, blockPosition, new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w)), declineDuration);

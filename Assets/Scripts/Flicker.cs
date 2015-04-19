@@ -19,7 +19,7 @@ public class Flicker : MonoBehaviour {
 		{
 			counter = 0.0f;
 			toggleTime = Random.Range(0.04f, 0.6f);
-			light.enabled = !light.enabled;
+			GetComponent<Light>().enabled = !GetComponent<Light>().enabled;
 		}
 
 

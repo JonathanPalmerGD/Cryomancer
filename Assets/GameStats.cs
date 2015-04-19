@@ -43,7 +43,7 @@ public class GameStats : MonoBehaviour
 		mouseXSensitivity = look.sensitivityX;
 		mouseYSensitivity = look.sensitivityY;
 
-		MouseLook look2 = GameObject.FindGameObjectWithTag("Player").transform.FindChild("Main Camera").camera.GetComponent<MouseLook>();
+		MouseLook look2 = GameObject.FindGameObjectWithTag("Player").transform.FindChild("Main Camera").GetComponent<Camera>().GetComponent<MouseLook>();
 
 		mouseXSensitivity = look2.sensitivityX;
 		mouseYSensitivity = look2.sensitivityY;
@@ -60,7 +60,7 @@ public class GameStats : MonoBehaviour
 			look.sensitivityX = mouseXSensitivity;
 			look.sensitivityY = mouseYSensitivity;
 
-			MouseLook look2 = GameObject.FindGameObjectWithTag("Player").transform.FindChild("Main Camera").camera.GetComponent<MouseLook>();
+			MouseLook look2 = GameObject.FindGameObjectWithTag("Player").transform.FindChild("Main Camera").GetComponent<Camera>().GetComponent<MouseLook>();
 
 			look2.sensitivityX = mouseXSensitivity;
 			look2.sensitivityY = mouseYSensitivity;

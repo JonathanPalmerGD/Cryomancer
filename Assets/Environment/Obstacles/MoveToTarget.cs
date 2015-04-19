@@ -19,6 +19,6 @@ public class MoveToTarget : MonoBehaviour
 		//Move in the direction of our target at our approach speed
 		Vector3 dirToPlayer = player.transform.position - transform.position;
 		dirToPlayer += Vector3.up * distAbovePlayer;
-		rigidbody.velocity = dirToPlayer.normalized * approachSpeed;
+		GetComponent<Rigidbody>().velocity = dirToPlayer.normalized * approachSpeed;
 	}
 }

@@ -73,6 +73,7 @@ public class BossStats : MonoBehaviour
 		
 		//Make sure things are in their proper start state
 		platformIgniter.enabled = false;
+
 		spawner.enabled = false;
 		shield.SetActive(false);
 		victorySphere.SetActive(false);
@@ -137,7 +138,7 @@ public class BossStats : MonoBehaviour
 
 		if (flickerCounter < 0)
 		{
-			renderer.material.color = Color.black;
+			GetComponent<Renderer>().material.color = Color.black;
 		}
 
 		#region Phases
@@ -206,9 +207,9 @@ public class BossStats : MonoBehaviour
 		}
 		if (health <= 0 && stateCounter >= dyingDuration && phase == BossPhase.Dying)
 		{
-			GameObject.FindGameObjectWithTag("Player").transform.FindChild("AudioBus").audio.Stop();
+			GameObject.FindGameObjectWithTag("Player").transform.FindChild("AudioBus").GetComponent<AudioSource>().Stop();
 
-			deathExplosion.audio.Play();
+			deathExplosion.GetComponent<AudioSource>().Play();
 			deathExplosion.GetComponent<Detonator>().Explode();
 			victorySphere.SetActive(true);
 			gameObject.SetActive(false);
@@ -224,11 +225,13 @@ public class BossStats : MonoBehaviour
 			gunSpark.ResetSignal();
 			gunSpark.enabled = false;
 			gunSpark.counter = -3;
-			audio.clip = newAge;
-			audio.Play();
+			GetComponent<AudioSource>().clip = newAge;
+			GetComponent<AudioSource>().Play();
 			ChangeTokens(true);
 			shield.SetActive(true);
 			ChangeAtmoLight(atmosphereLights[1], transDuration, .10f);
+			platformIgniter.enabled = true;
+			platformIgniter.ignited = Igniter.PlatformGroup.Inner;
 		}
 		#endregion
 		#region Transition
@@ -250,8 +253,8 @@ public class BossStats : MonoBehaviour
 			spawner.counter = -5;
 			spawner.enabled = false;
 			ChangeTokens(false);
-			audio.clip = abyssBeckons;
-			audio.Play();
+			GetComponent<AudioSource>().clip = abyssBeckons;
+			GetComponent<AudioSource>().Play();
 			ChangeAtmoLight(atmosphereLights[2], morphDuration, .10f);
 		}
 		#endregion
@@ -273,8 +276,8 @@ public class BossStats : MonoBehaviour
 			gunSpark.enabled = false;
 			gunSpark.ResetSignal();
 			spawner.enabled = false;
-			audio.clip = lastWords;
-			audio.Play();
+			GetComponent<AudioSource>().clip = lastWords;
+			GetComponent<AudioSource>().Play();
 			ChangeAtmoLight(atmosphereLights[0], dyingDuration, .1f);
 			ResetTelePlane();
 			GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -368,7 +371,7 @@ public class BossStats : MonoBehaviour
 			health -= damageDealt;
 		}
 		flickerCounter = flickerDuration;
-		renderer.material.color = Color.red;
+		GetComponent<Renderer>().material.color = Color.red;
 	}
 
 	//Unneeded functions. Intended to use them but all these computations got done elsewhere in triggers.

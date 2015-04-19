@@ -221,7 +221,7 @@ public class FireAtPlayer : MonoBehaviour
 				
 				bullet.GetComponent<EvilToken>().difficulty = difficulty;
 				
-				bullet.rigidbody.AddForce((dirToPlayer + randV) * buckVelocity * bullet.rigidbody.mass);
+				bullet.GetComponent<Rigidbody>().AddForce((dirToPlayer + randV) * buckVelocity * bullet.GetComponent<Rigidbody>().mass);
 
 				Destroy(bullet, buckLifeTime);
 			}
@@ -254,7 +254,7 @@ public class FireAtPlayer : MonoBehaviour
 
 					bullet.GetComponent<EvilToken>().difficulty = difficulty;
 
-					bullet.rigidbody.AddForce(dirToPlayer * streamVelocity * bullet.rigidbody.mass);
+					bullet.GetComponent<Rigidbody>().AddForce(dirToPlayer * streamVelocity * bullet.GetComponent<Rigidbody>().mass);
 
 					reloadCount++;
 
@@ -291,7 +291,7 @@ public class FireAtPlayer : MonoBehaviour
 
 					bullet.GetComponent<EvilToken>().difficulty = difficulty;
 
-					bullet.rigidbody.AddForce(dirToPlayer * laserVelocity * bullet.rigidbody.mass);
+					bullet.GetComponent<Rigidbody>().AddForce(dirToPlayer * laserVelocity * bullet.GetComponent<Rigidbody>().mass);
 
 					reloadCount++;
 

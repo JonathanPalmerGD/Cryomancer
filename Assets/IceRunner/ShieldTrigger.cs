@@ -11,7 +11,7 @@ public class ShieldTrigger : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		playerAudio = GameObject.FindGameObjectWithTag("Player").audio;
+		playerAudio = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -44,18 +44,18 @@ public class ShieldTrigger : MonoBehaviour
 			}
 			else if (sResult.Result() == 2)
 			{
-				if (collider.gameObject.rigidbody != null)
+				if (collider.gameObject.GetComponent<Rigidbody>() != null)
 				{
 					//Stop the object
-					collider.gameObject.rigidbody.velocity = new Vector3();
+					collider.gameObject.GetComponent<Rigidbody>().velocity = new Vector3();
 				}
 			}
 			else if (sResult.Result() == 3)
 			{
-				if (collider.gameObject.rigidbody != null)
+				if (collider.gameObject.GetComponent<Rigidbody>() != null)
 				{
 					//Send the projectile in the direction of the shield
-					collider.gameObject.rigidbody.velocity = transform.forward * collider.gameObject.rigidbody.velocity.magnitude;
+					collider.gameObject.GetComponent<Rigidbody>().velocity = transform.forward * collider.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
 
 					//Play our audio
 					playerAudio.clip = reflectClip;
@@ -73,10 +73,10 @@ public class ShieldTrigger : MonoBehaviour
 				//Tell the thing to freeze. Destroy the shield.
 				collider.gameObject.GetComponent<EvilToken>().enabled = false;
 				collider.gameObject.GetComponent<MoveToTarget>().enabled = false;
-				collider.gameObject.rigidbody.useGravity = true;
-				collider.gameObject.renderer.material = freezeMaterial;
-				collider.gameObject.renderer.particleSystem.enableEmission = false;
-				collider.gameObject.renderer.particleSystem.light.enabled = false;
+				collider.gameObject.GetComponent<Rigidbody>().useGravity = true;
+				collider.gameObject.GetComponent<Renderer>().material = freezeMaterial;
+				collider.gameObject.GetComponent<Renderer>().GetComponent<ParticleSystem>().enableEmission = false;
+				collider.gameObject.GetComponent<Renderer>().GetComponent<ParticleSystem>().GetComponent<Light>().enabled = false;
 				
 				Destroy(this.gameObject);
 			}

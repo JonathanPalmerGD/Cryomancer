@@ -82,10 +82,10 @@ public class DarkReset : MonoBehaviour
 	void OnCollisionEnter(Collision c)
 	{
 		//If when we hit something and it has a rigid body
-		if (enableGravityOnHit && c.gameObject.rigidbody != null)
+		if (enableGravityOnHit && c.gameObject.GetComponent<Rigidbody>() != null)
 		{
 			//Say that thing now respects gravity.
-			c.gameObject.rigidbody.useGravity = true;
+			c.gameObject.GetComponent<Rigidbody>().useGravity = true;
 		}
 
 		/*//If the orb hasn't hurt the player recently. and the thing we hit was the player

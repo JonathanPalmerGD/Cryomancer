@@ -47,7 +47,7 @@ public class Spawner : MonoBehaviour
 					curSpawnTime = Random.Range(spawnMin, spawnMax);
 				}
 				//Make a new object at our position which will die after X seconds
-				Destroy(Instantiate(spawnPrefab, new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z), new Quaternion()), objectLifeTime);
+				Destroy(Instantiate(spawnPrefab, new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z), Quaternion.identity), objectLifeTime);
 				//Reset our counter.
 				counter = 0.0f;
 				if (curSpawnTime > minSpawnTime)

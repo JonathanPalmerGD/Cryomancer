@@ -25,12 +25,12 @@ public class MaterialFlicker : MonoBehaviour {
 			if (matChoice)
 			{
 				matChoice = !matChoice;
-				renderer.material = mat2;
+				GetComponent<Renderer>().material = mat2;
 			}
 			else
 			{
 				matChoice = !matChoice;
-				renderer.material = mat1;
+				GetComponent<Renderer>().material = mat1;
 			}
 
 			//renderer.material = //other material

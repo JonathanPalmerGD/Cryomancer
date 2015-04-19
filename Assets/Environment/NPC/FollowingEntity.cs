@@ -25,21 +25,21 @@ public class FollowingEntity : MonoBehaviour
 			{
 				if (target.tag == "Player")
 				{
-					rigidbody.velocity = dirToTarget.normalized * approachSpeed * 10 * dirToTarget.magnitude / slowDist * Time.deltaTime;
+					GetComponent<Rigidbody>().velocity = dirToTarget.normalized * approachSpeed * 10 * dirToTarget.magnitude / slowDist * Time.deltaTime;
 				}
 				else
 				{
-					rigidbody.velocity = dirToTarget.normalized * approachSpeed * 10 * Time.deltaTime;
+					GetComponent<Rigidbody>().velocity = dirToTarget.normalized * approachSpeed * 10 * Time.deltaTime;
 				}
 			}
 			else
 			{
-				rigidbody.velocity = Vector3.zero;
+				GetComponent<Rigidbody>().velocity = Vector3.zero;
 			}
 		}
 		else
 		{
-			rigidbody.velocity = Vector3.zero;
+			GetComponent<Rigidbody>().velocity = Vector3.zero;
 		}
 	}
 }

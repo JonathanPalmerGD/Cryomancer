@@ -35,7 +35,7 @@ public class ProximityRegion : MonoBehaviour
 			//The fairy will always move towards its target and circle around it
 			playerInRange = true;
 			fairy.target = player;
-			fairy.rigidbody.velocity = Vector3.zero;
+			fairy.GetComponent<Rigidbody>().velocity = Vector3.zero;
 		}
 	}
 
@@ -46,7 +46,7 @@ public class ProximityRegion : MonoBehaviour
 			//Tell the fairy to go home
 			playerInRange = false;
 			fairy.target = fairyIdleGameObject;
-			fairy.rigidbody.velocity = Vector3.zero;
+			fairy.GetComponent<Rigidbody>().velocity = Vector3.zero;
 		}
 	}
 }

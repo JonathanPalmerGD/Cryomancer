@@ -49,13 +49,13 @@ public class ScreenFlash : MonoBehaviour
 		displaySplash = true;
 		if (playAudio != null)
 		{
-			audio.clip = playAudio;
-			audio.Play();
+			GetComponent<AudioSource>().clip = playAudio;
+			GetComponent<AudioSource>().Play();
 		}
 		else
 		{
-			audio.clip = hurtNoise;
-			audio.Play();
+			GetComponent<AudioSource>().clip = hurtNoise;
+			GetComponent<AudioSource>().Play();
 		}
 	}
 }

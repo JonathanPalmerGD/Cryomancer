@@ -26,7 +26,7 @@ public class FallDetect : MonoBehaviour
 		//If we raycast with something that has a jumppad
 		if (rayCast && hitInfo.collider.gameObject.tag == "Fallpad")
 		{
-			hitInfo.collider.gameObject.rigidbody.useGravity = true;
+			hitInfo.collider.gameObject.GetComponent<Rigidbody>().useGravity = true;
 		}
 	}
 }

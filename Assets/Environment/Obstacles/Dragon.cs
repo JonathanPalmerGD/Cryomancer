@@ -43,7 +43,7 @@ public class Dragon : MonoBehaviour
 
 		Vector3 dirToPlayer = player.transform.position - transform.position;
 		dirToPlayer += Vector3.up * distAbovePlayer;
-		rigidbody.velocity = dirToPlayer.normalized * approachSpeed;
+		GetComponent<Rigidbody>().velocity = dirToPlayer.normalized * approachSpeed;
 
 		//float diffX = player.transform.position.x - transform.position.x;
 		//float diffZ = player.transform.position.z - transform.position.z;

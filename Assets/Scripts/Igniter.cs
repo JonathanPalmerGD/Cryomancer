@@ -10,8 +10,8 @@ public class Igniter : MonoBehaviour
 	public GameObject secondaryCheckpoint;
 	public GameObject[] torches;
 	public float counter;
-	public enum PlatformGroup { Inner, Corner, Exterior };
-	public PlatformGroup ignited = PlatformGroup.Inner;
+	public enum PlatformGroup { None, Inner, Corner, Exterior };
+	public PlatformGroup ignited = PlatformGroup.None;
 	public float burnFreqMin = 15f;
 	public float burnFreqMax = 25f;
 	public float burnFreqStandard = 20f;
@@ -28,7 +28,7 @@ public class Igniter : MonoBehaviour
 		}
 		for (int i = 0; i < platformInner.Length; i++)
 		{
-			platformInner[i].GetComponentInChildren<Burning>().Enable();
+			platformInner[i].GetComponentInChildren<Burning>().Disable();
 
 			//change enabled checkpoint
 			player.GetComponent<TeleTarget>().teleTarget = secondaryCheckpoint;
@@ -59,7 +59,19 @@ public class Igniter : MonoBehaviour
 	{
 		counter += Time.deltaTime;
 
-		if (ignited == PlatformGroup.Inner)
+		if (ignited == PlatformGroup.None)
+		{
+			for (int i = 0; i < platformInner.Length; i++)
+			{
+				platformInner[i].GetComponentInChildren<Burning>().Disable();
+				platformCorner[i].GetComponentInChildren<Burning>().Disable();
+				platformExterior[i].GetComponentInChildren<Burning>().Disable();
+			}
+
+			//change enabled checkpoint
+			player.GetComponent<TeleTarget>().teleTarget = primaryCheckpoint;
+		}
+		else if (ignited == PlatformGroup.Inner)
 		{
 			if (counter >= platformBurnDuration)
 			{
@@ -73,6 +85,20 @@ public class Igniter : MonoBehaviour
 				}
 				counter -= platformBurnDuration;
 				ignited = PlatformGroup.Corner;
+			}
+			else
+			{
+				if (platformInner.Length > 0)
+				{
+					if (!platformInner[0].GetComponent<Burning>().onFire)
+					{
+						for (int i = 0; i < platformInner.Length; i++)
+						{
+							platformInner[i].GetComponent<Burning>().Enable();
+
+						}
+					}
+				}
 			}
 		}
 		else if (ignited == PlatformGroup.Corner)

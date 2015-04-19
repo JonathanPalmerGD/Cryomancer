@@ -23,13 +23,13 @@ public class AutoFire : MonoBehaviour
 		counter += Time.deltaTime;
 		if (counter > waitDuration - 0.5f)
 		{
-			nose.renderer.material.color = colorOfSignal[1];
-			head.renderer.material.color = colorOfSignal[1];
+			nose.GetComponent<Renderer>().material.color = colorOfSignal[1];
+			head.GetComponent<Renderer>().material.color = colorOfSignal[1];
 		}
 		else
 		{
-			nose.renderer.material.color = colorOfSignal[0];
-			head.renderer.material.color = colorOfSignal[0];
+			nose.GetComponent<Renderer>().material.color = colorOfSignal[0];
+			head.GetComponent<Renderer>().material.color = colorOfSignal[0];
 		}
 		if (counter > waitDuration)
 		{
@@ -41,7 +41,7 @@ public class AutoFire : MonoBehaviour
 			bullet.GetComponent<EvilToken>().damage[1] = 0;
 			bullet.GetComponent<EvilToken>().damage[2] = 0;
 
-			bullet.rigidbody.AddForce(transform.forward * 10 * streamVelocity * bullet.rigidbody.mass);
+			bullet.GetComponent<Rigidbody>().AddForce(transform.forward * 10 * streamVelocity * bullet.GetComponent<Rigidbody>().mass);
 
 			Destroy(bullet, streamBulletLifeTime);
 		}

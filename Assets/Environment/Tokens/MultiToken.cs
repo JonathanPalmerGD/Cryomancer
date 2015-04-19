@@ -75,16 +75,16 @@ public class MultiToken : MonoBehaviour
 			if (playOnPickup)
 			{
 
-				player.audio.clip = acquireClip;
-				player.audio.Play();
+				player.GetComponent<AudioSource>().clip = acquireClip;
+				player.GetComponent<AudioSource>().Play();
 			}
-			if (light != null)
+			if (GetComponent<Light>() != null)
 			{
-				light.enabled = false;
+				GetComponent<Light>().enabled = false;
 			}
 			enabled = false;
-			renderer.enabled = false;
-			particleSystem.enableEmission = false;
+			GetComponent<Renderer>().enabled = false;
+			GetComponent<ParticleSystem>().enableEmission = false;
 		}
 	}
 }

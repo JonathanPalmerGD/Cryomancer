@@ -19,8 +19,8 @@ public class Token : MonoBehaviour
 		if (collisionRadius > distanceBetween)
 		{
 			enabled = false;
-			renderer.enabled = false;
-			particleSystem.enableEmission = false;
+			GetComponent<Renderer>().enabled = false;
+			GetComponent<ParticleSystem>().enableEmission = false;
 		}
 	}
 }

@@ -90,7 +90,7 @@ public class Dargon : MonoBehaviour
 		//Debug.Log((moveDirection * Time.deltaTime).magnitude);
 
 		//rigidbody.velocity = moveDirection;// *Time.deltaTime;
-		rigidbody.velocity = combinedVectors;
+		GetComponent<Rigidbody>().velocity = combinedVectors;
 
 		//Debug.DrawLine(transform.position, transform.position + moveDirection, Color.white);
 		// the CharacterController moves us subject to physical constraints
@@ -168,8 +168,8 @@ public class Dargon : MonoBehaviour
 	{
 		get
 		{
-			float x = renderer.bounds.extents.x;
-			float z = renderer.bounds.extents.z;
+			float x = GetComponent<Renderer>().bounds.extents.x;
+			float z = GetComponent<Renderer>().bounds.extents.z;
 			return Mathf.Sqrt(x * x + z * z);
 		}
 	}

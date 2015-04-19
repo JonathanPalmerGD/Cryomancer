@@ -16,10 +16,10 @@ public class EnableGravity : MonoBehaviour {
 	void OnCollisionEnter(Collision c)
 	{
 		//If when we hit something and it has a rigid body
-		if (c.gameObject.rigidbody != null)
+		if (c.gameObject.GetComponent<Rigidbody>() != null)
 		{
 			//Say that thing now respects gravity.
-			c.gameObject.rigidbody.useGravity = true;
+			c.gameObject.GetComponent<Rigidbody>().useGravity = true;
 		}
 	}
 }

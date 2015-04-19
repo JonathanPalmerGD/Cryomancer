@@ -35,7 +35,7 @@ public class PlayerStats : MonoBehaviour
 	{
 		if (cursorLocking)
 		{
-			Screen.showCursor = false;
+			Cursor.visible = false;
 			Screen.lockCursor = true;
 		}
 
@@ -105,7 +105,7 @@ public class PlayerStats : MonoBehaviour
 
 		if (wasPlaying)
 		{
-			transform.FindChild("AudioBus").audio.Play();
+			transform.FindChild("AudioBus").GetComponent<AudioSource>().Play();
 		}
 	}
 
@@ -116,10 +116,10 @@ public class PlayerStats : MonoBehaviour
 
 		if (transform.FindChild("AudioBus") != null)
 		{
-			AudioSource playerBus = transform.FindChild("AudioBus").audio;
+			AudioSource playerBus = transform.FindChild("AudioBus").GetComponent<AudioSource>();
 			if (playerBus.isPlaying)
 			{
-				transform.FindChild("AudioBus").audio.Pause();
+				transform.FindChild("AudioBus").GetComponent<AudioSource>().Pause();
 				wasPlaying = true;
 			}
 		}
@@ -169,7 +169,7 @@ public class PlayerStats : MonoBehaviour
 		if (GUI.Button(new Rect(10, 110, 90, 80), "Reduce\nSensitivity"))
 		{
 			MouseLook look = GetComponent<MouseLook>();
-			MouseLook look2 = transform.FindChild("Main Camera").camera.GetComponent<MouseLook>();
+			MouseLook look2 = transform.FindChild("Main Camera").GetComponent<Camera>().GetComponent<MouseLook>();
 			if (look.sensitivityX > 3)
 			{
 				look.sensitivityX -= 2f;
@@ -186,7 +186,7 @@ public class PlayerStats : MonoBehaviour
 		if (GUI.Button(new Rect(100, 110, 90, 80), "Increase\nSensitivity"))
 		{
 			MouseLook look = GetComponent<MouseLook>();
-			MouseLook look2 = transform.FindChild("Main Camera").camera.GetComponent<MouseLook>();
+			MouseLook look2 = transform.FindChild("Main Camera").GetComponent<Camera>().GetComponent<MouseLook>();
 			if (look.sensitivityX < 19)
 			{
 				look.sensitivityX += 2f;
@@ -273,12 +273,12 @@ public class PlayerStats : MonoBehaviour
 		#region Cursor Hide & Cursor LockLocking
 		if (paused)
 		{
-			Screen.showCursor = true;
+			Cursor.visible = true;
 			Screen.lockCursor = false;
 		}
 		else if (!paused)
 		{
-			Screen.showCursor = false;
+			Cursor.visible = false;
 			Screen.lockCursor = true;
 		}
 		#endregion

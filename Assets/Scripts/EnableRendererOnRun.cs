@@ -6,6 +6,6 @@ public class EnableRendererOnRun : MonoBehaviour
 
 	void Start () 
 	{
-		renderer.enabled = true;
+		GetComponent<Renderer>().enabled = true;
 	}
 }

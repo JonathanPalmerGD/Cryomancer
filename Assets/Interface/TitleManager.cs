@@ -192,7 +192,7 @@ public class TitleManager : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		Screen.showCursor = true;
+		Cursor.visible = true;
 		Screen.lockCursor = false;
 
 		if (GameObject.FindGameObjectWithTag("Properties") != null)

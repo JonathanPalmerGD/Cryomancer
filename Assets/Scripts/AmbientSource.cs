@@ -22,7 +22,7 @@ public class AmbientSource : MonoBehaviour
 	{
 		counter += Time.deltaTime;
 
-		if (collider.bounds.Contains(player.transform.position))
+		if (GetComponent<Collider>().bounds.Contains(player.transform.position))
 		{
 			Debug.Log("Inside Mesh\n");
 			foreach (AmbientGroup aud in AmbientManager.Instance.ambGroups)

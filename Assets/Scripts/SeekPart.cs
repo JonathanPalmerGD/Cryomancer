@@ -41,10 +41,10 @@ public class SeekPart : MonoBehaviour
 	void Start () 
 	{
 		slowDistStart = .3f;
-		myOffsetAmt = transform.forward * renderer.bounds.extents.x;
-		if (curTarg.renderer != null)
+		myOffsetAmt = transform.forward * GetComponent<Renderer>().bounds.extents.x;
+		if (curTarg.GetComponent<Renderer>() != null)
 		{
-			targOffsetAmt = curTarg.transform.forward * -1 * curTarg.renderer.bounds.extents.x;
+			targOffsetAmt = curTarg.transform.forward * -1 * curTarg.GetComponent<Renderer>().bounds.extents.x;
 		}
 		else
 		{
@@ -78,16 +78,16 @@ public class SeekPart : MonoBehaviour
 		//Speed scale based on distance. If we're behind speed up
 		if (curDistFromNextTail < (baseDistFromNextTail + slowDistStart))
 		{
-			renderer.material.color = Color.gray;
+			GetComponent<Renderer>().material.color = Color.gray;
 			combinedVectors = combinedVectors * (curDistFromNextTail / (baseDistFromNextTail + slowDistStart));
 		}
 		else
 		{
 			combinedVectors = combinedVectors * 1.5f * (curDistFromNextTail / (baseDistFromNextTail + slowDistStart));
-			renderer.material.color = Color.red;
+			GetComponent<Renderer>().material.color = Color.red;
 
 		}
-		rigidbody.velocity = combinedVectors;
+		GetComponent<Rigidbody>().velocity = combinedVectors;
 
 
 		posWithOffset = transform.position + myOffsetAmt;

@@ -37,8 +37,8 @@ public class TriggerSetAbilities : MonoBehaviour
 			if ((runner.declineUnlocked || runner.inclineUnlocked || runner.shieldUnlocked || runner.platformUnlocked) && contactClipToPlay != null)
 			{
 				//Play the audio
-				collider.audio.clip = contactClipToPlay;
-				collider.audio.Play();
+				collider.GetComponent<AudioSource>().clip = contactClipToPlay;
+				collider.GetComponent<AudioSource>().Play();
 			}
 
 			//If we let them keep a power, they can keep it, otherwise remove it

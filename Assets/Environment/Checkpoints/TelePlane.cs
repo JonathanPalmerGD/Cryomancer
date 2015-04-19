@@ -38,8 +38,8 @@ public class TelePlane : MonoBehaviour
 		{
 			if ( contactClipToPlay != null)
 			{
-				player.audio.clip = contactClipToPlay;
-				player.audio.Play();
+				player.GetComponent<AudioSource>().clip = contactClipToPlay;
+				player.GetComponent<AudioSource>().Play();
 			}
 
 			//If the target object exists
